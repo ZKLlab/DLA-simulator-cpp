@@ -15,10 +15,10 @@ void delay(int ms) {
 }
 
 int main() {
-    int rows = 51, cols = 51;
+    int rows = 61, cols = 61;
     DiffusionSimulator sim(rows, cols);
     sim.set(rows / 2, cols / 2);
-    for (int i = 0; i < 300; i++) {
+    for (int i = 0; i < 600; i++) {
         sim.simulate();
         cls();
         sim.print();

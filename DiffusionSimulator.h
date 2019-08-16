@@ -9,7 +9,6 @@
 
 class DiffusionSimulator {
     int mNumRows, mNumCols;
-
     std::vector<std::vector<int>> mGrid;
     std::vector<int> mtimeSpent;
 
@@ -20,7 +19,6 @@ class DiffusionSimulator {
     void update_location(int &xPos, int &yPos);
 
 public:
-
     DiffusionSimulator(int num_rows, int num_cols);
 
     void print();

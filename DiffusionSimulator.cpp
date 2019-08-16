@@ -9,13 +9,14 @@ DiffusionSimulator::DiffusionSimulator(int num_rows, int num_cols) : mNumRows(nu
 }
 
 void DiffusionSimulator::print() {
+    std::cout << " + Steps ------+ Num -+ Graph -" << std::endl;
     for (int i = 0; i < mtimeSpent.size(); i++) {
         std::cout << " |             |      |";
         if (i < mtimeSpent.size() - 1) {
-            std::cout << std::endl << " | " << std::setw(4) << std::right << i * 50 << " ~ "
-                      << std::setw(4) << std::left << i * 50 + 49 << " | ";
+            std::cout << std::endl << " | " << std::setw(4) << std::right << i * 10 << " ~ "
+                      << std::setw(4) << std::left << i * 10 + 9 << " | ";
         } else {
-            std::cout << std::endl << " | " << std::setw(4) << std::right << i * 50 << "+       | ";
+            std::cout << std::endl << " | " << std::setw(4) << std::right << i * 10 << "+       | ";
         }
         std::cout << std::setw(4) << std::right << mtimeSpent[i] << " | ";
         for (int j = 0; j < mtimeSpent[i]; j++) {
@@ -27,7 +28,8 @@ void DiffusionSimulator::print() {
         }
         std::cout << std::endl;
     }
-    std::cout << " |             |      |" << std::endl << std::endl
+    std::cout << " |             |      |" << std::endl
+              << " +-------------+------+--------" << std::endl << std::endl
               << " +";
     for (int i = 0; i < mNumCols; i++) {
         std::cout << '-';
@@ -77,7 +79,7 @@ void DiffusionSimulator::simulate() {
         update_location(col, row);
         count++;
     }
-    count /= 50;
+    count /= 10;
     if (count >= mtimeSpent.size()) {
         count = mtimeSpent.size() - 1;
     }
@@ -111,9 +113,8 @@ bool DiffusionSimulator::check_neighbours(int row, int col) {
 void DiffusionSimulator::update_location(int &xPos, int &yPos) {
     static std::random_device rd;
     static std::default_random_engine gen(rd());
-    double vec_angel = atan2(mNumCols / 2.0 - xPos, mNumRows / 2.0 - yPos);
-    std::normal_distribution<> dis(vec_angel, M_PI * 2 + vec_angel);
-//    std::uniform_real_distribution<> dis(vec_angel, M_PI * 2 + vec_angel);
+    double vec_angel = atan2(mNumRows / 2.0 - yPos, mNumCols / 2.0 - xPos);
+    std::normal_distribution<> dis(vec_angel, M_PI_2);
     double angel = dis(gen);
     xPos += lround(cos(angel));
     yPos += lround(sin(angel));

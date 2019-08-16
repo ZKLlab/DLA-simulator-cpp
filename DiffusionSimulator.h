@@ -10,7 +10,7 @@
 class DiffusionSimulator {
     int mNumRows, mNumCols;
     std::vector<std::vector<int>> mGrid;
-    std::vector<int> mtimeSpent;
+    std::vector<int> mTimeSpent;
 
     bool check(int row, int col);
 

@@ -5,21 +5,21 @@ DiffusionSimulator::DiffusionSimulator(int num_rows, int num_cols) : mNumRows(nu
     for (auto &row : mGrid) {
         row.resize(mNumCols, 0);
     }
-    mtimeSpent.resize(21, 0);
+    mTimeSpent.resize(17, 0);
 }
 
 void DiffusionSimulator::print() {
-    std::cout << " + Steps ------+ Num -+ Graph -" << std::endl;
-    for (int i = 0; i < mtimeSpent.size(); i++) {
-        std::cout << " |             |      |";
-        if (i < mtimeSpent.size() - 1) {
-            std::cout << std::endl << " | " << std::setw(4) << std::right << i * 10 << " ~ "
-                      << std::setw(4) << std::left << i * 10 + 9 << " | ";
+    std::cout << " + Steps ----+ Num -+ Graph -" << std::endl;
+    for (int i = 0; i < mTimeSpent.size(); i++) {
+        std::cout << " |           |      |";
+        if (i < mTimeSpent.size() - 1) {
+            std::cout << std::endl << " | " << std::setw(3) << std::right << i * 10 << " ~ "
+                      << std::setw(3) << std::left << i * 10 + 9 << " | ";
         } else {
-            std::cout << std::endl << " | " << std::setw(4) << std::right << i * 10 << "+       | ";
+            std::cout << std::endl << " | " << std::setw(3) << std::right << i * 10 << "+      | ";
         }
-        std::cout << std::setw(4) << std::right << mtimeSpent[i] << " | ";
-        for (int j = 0; j < mtimeSpent[i]; j++) {
+        std::cout << std::setw(4) << std::right << mTimeSpent[i] << " | ";
+        for (int j = 0; j < mTimeSpent[i]; j++) {
             std::cout << '=';
             if (j >= 100) {
                 std::cout << " MORE - - -";
@@ -28,8 +28,8 @@ void DiffusionSimulator::print() {
         }
         std::cout << std::endl;
     }
-    std::cout << " |             |      |" << std::endl
-              << " +-------------+------+--------" << std::endl << std::endl
+    std::cout << " |           |      |" << std::endl
+              << " +-----------+------+--------" << std::endl << std::endl
               << " +";
     for (int i = 0; i < mNumCols; i++) {
         std::cout << '-';
@@ -80,10 +80,10 @@ void DiffusionSimulator::simulate() {
         count++;
     }
     count /= 10;
-    if (count >= mtimeSpent.size()) {
-        count = mtimeSpent.size() - 1;
+    if (count >= mTimeSpent.size()) {
+        count = mTimeSpent.size() - 1;
     }
-    mtimeSpent[count]++;
+    mTimeSpent[count]++;
     set(row, col);
 }
 
